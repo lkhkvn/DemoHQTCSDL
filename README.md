@@ -30,7 +30,7 @@ I. Database query caching Truy cập:
 2. http://localhost:8081/api/with-cache/all lần 1 cache miss vì nạp dữ liệu từ MySQL vào Redis reload lại lần 2.
 3. nhấn f12 cả 2 endpoit vào network để so sánh thời gian thấy dữ liệu redis truyền nhanh hơn
    
-II. * Session Management:
+II. * Session Management
 Quản lý phiên người dùng tập trung, phân tán.
 - Trong kiến trúc Monolithic (đơn khối) hoặc khi chỉ chạy một Server duy nhất, Session được lưu trực tiếp vào bộ nhớ RAM của chính Server đó (gọi là Sticky Session hoặc In-Memory Session) và công nghệ này được ứng dụng rộng rãi trong thực tế.
 - Đăng nhập tại App 1: Truy cập http://localhost:8083/auth/login?user=NguyenVanA. Kiểm tra tại App 2: Truy cập http://localhost:8083/auth/check.
@@ -40,7 +40,11 @@ Java: Stop Server.
 Browser: Truy cập /auth/check -> Vẫn còn dữ liệu!
 
 III.Rate Limiting: Kiểm soát tần suất truy cập API/Database.
+
 Bước 1: Chuẩn bị môi trường quan sát: docker exec -it redis-container redis-cli monitor
+
 Bước 2: Thực hiện kiểm thử (Execution): Mở trình duyệt và truy cập: http://localhost:8083/api/test/hello, Quan sát trình duyệt: Hiển thị dòng chữ Yeu cau thanh cong.
+
 Bước 3: Quan sát Terminal: Xuất hiện lệnh INCR và PEXPIRE với giá trị tăng dần. Điều này chứng tỏ Redis đã ghi nhận IP của bạn.
-Bước 4 Nhấn f5 qua 10 lần tronng 1 phút trình duyệt sẽ hiển thị 429 Too Many Requests: Too many requests! Vui long thu lai sau 1 phut. Hệ thống đã chặn đứng yêu cầu trước khi nó kịp chạm vào Logic xử lý nặng phía sau, giúp tiết kiệm tài nguyên Server. 
+
+Bước 4: Nhấn f5 qua 10 lần tronng 1 phút trình duyệt sẽ hiển thị 429 Too Many Requests: Too many requests! Vui long thu lai sau 1 phut. Hệ thống đã chặn đứng yêu cầu trước khi nó kịp chạm vào Logic xử lý nặng phía sau, giúp tiết kiệm tài nguyên Server. 
