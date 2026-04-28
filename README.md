@@ -29,6 +29,7 @@ I. Database query caching Truy cập:
 1.   truy cập vào 2 endpoint http://localhost:8081/api/no-cache/all
 2. http://localhost:8081/api/with-cache/all lần 1 cache miss vì nạp dữ liệu từ MySQL vào Redis reload lại lần 2.
 3. nhấn f12 cả 2 endpoit vào network để so sánh thời gian thấy dữ liệu redis truyền nhanh hơn
+   
 II. * Session Management:
 Quản lý phiên người dùng tập trung, phân tán.
 - Trong kiến trúc Monolithic (đơn khối) hoặc khi chỉ chạy một Server duy nhất, Session được lưu trực tiếp vào bộ nhớ RAM của chính Server đó (gọi là Sticky Session hoặc In-Memory Session) và công nghệ này được ứng dụng rộng rãi trong thực tế.
@@ -37,6 +38,7 @@ Quản lý phiên người dùng tập trung, phân tán.
 Redis-cli: Gõ keys * -> Show cho mọi người xem Key đã xuất hiện.
 Java: Stop Server.
 Browser: Truy cập /auth/check -> Vẫn còn dữ liệu!
+
 III.Rate Limiting: Kiểm soát tần suất truy cập API/Database.
 Bước 1: Chuẩn bị môi trường quan sát: docker exec -it redis-container redis-cli monitor
 Bước 2: Thực hiện kiểm thử (Execution): Mở trình duyệt và truy cập: http://localhost:8083/api/test/hello, Quan sát trình duyệt: Hiển thị dòng chữ Yeu cau thanh cong.
